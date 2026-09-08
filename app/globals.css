@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette — warm luxury: bronze/gold on deep charcoal */
+  --background: #0c0a09;
+  --foreground: #f5f0e8;
+  --muted: #a8a29e;
+  --accent: #c8a97e;
+  --accent-soft: #e8dcc8;
+  --surface: #1a1715;
+  --surface-2: #221e1b;
+  --surface-3: #38312a;
+  --border: #2e2924;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-display);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass {
+  background: rgba(26, 23, 21, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 169, 126, 0.15);
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(200,169,126,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Door knock — three visible thumps synced with the Web Audio knock at 0s/0.3s/0.6s. */
+@keyframes knock-thump {
+  0%, 100% { translate: 0 0; }
+  8% { translate: 3px 1px; }
+  16% { translate: 0 0; }
+  38% { translate: 3px 1px; }
+  46% { translate: 0 0; }
+  68% { translate: 3px 1px; }
+  76% { translate: 0 0; }
+}
+.knock-thump {
+  animation: knock-thump 0.9s ease-out;
+}
+
+.input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  color: var(--foreground);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input::placeholder { color: var(--muted); opacity: 0.6; }
+.input:focus { border-color: var(--accent); }
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
